@@ -203,7 +203,7 @@ export default function Home() {
   return (<div>
     {
       stuff.map((item) => {
-        return (<div key={item.title} style={{display: "flex"}}>
+        return (<div key={item.title} style={{display: "flex", "justify-content": "space-between"}}> {/* flex lets the following divs be on the same line */}
 	  <div>{item.title}</div>
 	  <div>{item.percent}</div>
 	</div>);
