@@ -200,10 +200,16 @@ var stuff = [
 ]
 
 export default function Home() {
+
+  const onClickRow = (item) => {
+    // TODO: persist selection
+  };
+
   return (<div>
     {
       stuff.map((item) =>
 	  <div
+	    onClick={onClickRow}
 	    key={item.title}
 	    style={{
 	      display: "flex",
