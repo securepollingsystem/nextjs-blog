@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useState } from 'react';
 
 var stuff = [ 
 	{title:"somestring ds;lfkjasd fjalkfjhfds asdlkjfhsadfkgsadfk gsadfasdga kdsfgfgfaks hdfsagfagffkjas dsf sadfdf khdsf gasdkf", percent:43},
@@ -199,17 +200,31 @@ var stuff = [
 	{title:"somestding", percent:53},
 ]
 
+const Confirm = ({ title }) => {
+  return (
+    <>
+      <div>Do you want to add this statement to your screed?</div>
+      <div><button>Confirm</button><button>Cancel</button></div>
+      <div>{title}</div>
+    </>
+  );
+}
+
 export default function Home() {
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const onClickRow = (item) => {
-    // TODO: persist selection
+    setSelectedItem(item);
   };
 
-  return (<div>
+  return (
+    selectedItem
+      ? <Confirm title={selectedItem.title} />
+      : <div>
     {
       stuff.map((item) =>
 	  <div
-	    onClick={onClickRow}
+	    onClick={() => onClickRow(item)}
 	    key={item.title}
 	    style={{
 	      display: "flex",
