@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 var stuff = [ 
-	{title:"somestring", percent:43},
+	{title:"somestring ds;lfkjasd fjalkfjhfds asdlkjfhsadfkgsadfk gsadfasdga kdsfgfgfaks hdfsagfagffkjas dsf sadfdf khdsf gasdkf", percent:43},
 	{title:"semestring", percent:44},
 	{title:"sogestring", percent:45},
 	{title:"somhstring", percent:48},
@@ -203,9 +203,15 @@ export default function Home() {
   return (<div>
     {
       stuff.map((item) => {
-        return (<div key={item.title} style={{display: "flex", "justify-content": "space-between"}}> {/* flex lets the following divs be on the same line */}
+        return (
+	  <div
+	    key={item.title}
+	    style={{
+	      display: "flex",
+	      "justify-content": "space-between"
+	    }}> {/* flex lets the following divs be on the same line */}
 	  <div>{item.title}</div>
-	  <div>{item.percent}</div>
+	  <div style={{ width: "3em" }}>{item.percent}</div>
 	</div>);
       })
     }
