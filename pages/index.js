@@ -229,7 +229,7 @@ export default function Home() {
 	    style={{
 	      display: "flex",
 	      "justify-content": "space-between"
-	    }}> {/* flex lets the following divs be on the same line */}
+	    }}> {/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */}
 	  <div>{item.title}</div>
 	  <div style={{ "min-width": "3em", border: "1px solid blue" }}>{item.percent}</div>
 	</div>
