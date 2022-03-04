@@ -202,8 +202,7 @@ var stuff = [
 export default function Home() {
   return (<div>
     {
-      stuff.map((item) => {
-        return (
+      stuff.map((item) =>
 	  <div
 	    key={item.title}
 	    style={{
@@ -212,8 +211,8 @@ export default function Home() {
 	    }}> {/* flex lets the following divs be on the same line */}
 	  <div>{item.title}</div>
 	  <div style={{ width: "3em" }}>{item.percent}</div>
-	</div>);
-      })
+	</div>
+      )
     }
 
   </div>);
