@@ -210,7 +210,7 @@ export default function Home() {
 	      "justify-content": "space-between"
 	    }}> {/* flex lets the following divs be on the same line */}
 	  <div>{item.title}</div>
-	  <div style={{ width: "3em" }}>{item.percent}</div>
+	  <div style={{ width: "3em", border: "1px solid blue" }}>{item.percent}</div>
 	</div>
       )
     }
