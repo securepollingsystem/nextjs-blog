@@ -1,228 +1,17 @@
-import Head from 'next/head'
-import { useState } from 'react';
+import { getItems } from '../src/db';
+import { useRouter } from 'next/router';
 
-var stuff = [ 
-	{title:"somestring ds;lfkjasd fjalkfjhfds asdlkjfhsadfkgsadfk gsadfasdga kdsfgfgfaks hdfsagfagffkjas dsf sadfdf khdsf gasdkf", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-	{title:"somestring", percent:43},
-	{title:"semestring", percent:44},
-	{title:"sogestring", percent:45},
-	{title:"somhstring", percent:48},
-	{title:"someetring", percent:47},
-	{title:"somessring", percent:46},
-	{title:"somestding", percent:53},
-]
-
-const Confirm = ({ title }) => {
-  return (
-    <>
-      <div>Do you want to add this statement to your screed?</div>
-      <div><button>Confirm</button><button>Cancel</button></div>
-      <div>{title}</div>
-    </>
-  );
-}
 
 export default function Home() {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const router = useRouter();
 
   const onClickRow = (item) => {
-    setSelectedItem(item);
+    router.push(`confirm?id=${item.id}`);
   };
 
-  return (
-    selectedItem
-      ? <Confirm title={selectedItem.title} />
-      : <div>
+  return (<div>
     {
-      stuff.map((item) =>
+      getItems().map((item) =>
 	  <div
 	    onClick={() => onClickRow(item)}
 	    key={item.title}
@@ -230,9 +19,9 @@ export default function Home() {
 	      display: "flex",
 	      "justify-content": "space-between"
 	    }}> {/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */}
-	  <div>{item.title}</div>
-	  <div style={{ "min-width": "3em", border: "1px solid blue" }}>{item.percent}</div>
-	</div>
+      <div>{item.title}</div>
+      <div style={{ "min-width": "3em", border: "1px solid blue" }}>{item.percent}</div>
+    </div>
       )
     }
 
