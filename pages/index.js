@@ -10,6 +10,8 @@ export default function Home() {
   };
 
   return (<div>
+    <h4>Secure Polling Demo</h4>
+    <br />
     {
       getItems().map((item) =>
 	  <div
