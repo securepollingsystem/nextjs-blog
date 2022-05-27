@@ -20,9 +20,10 @@ export default function Home() {
           style={{
             "display": "flex",
             "justify-content": "space-between",
+            "border-bottom": "1px solid black"
           }}> {/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */}
           <div>{item.title}</div>
-      <div style={{ "min-width": "3em", border: "1px solid blue" }}>{item.percent}</div>
+          <div style={{ "min-width": "3em" }}>{item.percent}</div>
         </div>
       )
     }
