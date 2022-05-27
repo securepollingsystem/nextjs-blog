@@ -1,8 +1,9 @@
 import { getItems, getSubset } from '../src/db';
 import { useRouter } from 'next/router';
-
+import { useState } from 'react';
 
 export default function Home() {
+  const [searchstring, setSearchstring] = useState("");
   const router = useRouter();
 
   const onClickRow = (item) => {
@@ -12,8 +13,9 @@ export default function Home() {
   return (<div>
     <h4>Secure Polling Demo</h4>
     <br />
+    <input value={searchstring} onChange={e => setSearchstring(e.target.value)}/>
     {
-      getItems().map((item) =>
+      getSubset(searchstring).map((item) =>
         <div
           onClick={() => onClickRow(item)}
           key={item.id} // react uses the key to keep track of DOM so must be unique
