@@ -27,4 +27,7 @@ var stuff = [ // list of objects
 ];
 
 export const getItem = (id) => stuff.find(s => s.id == id);
+
 export const getItems = () => stuff;
+
+export const getSubset = (subtext) => stuff.filter(({title}) => title.includes(subtext))

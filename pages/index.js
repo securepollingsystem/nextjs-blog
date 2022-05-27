@@ -1,4 +1,4 @@
-import { getItems } from '../src/db';
+import { getItems, getSubset } from '../src/db';
 import { useRouter } from 'next/router';
 
 
