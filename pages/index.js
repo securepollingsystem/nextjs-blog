@@ -21,11 +21,11 @@ export default function Home() {
           key={item.id} // react uses the key to keep track of DOM so must be unique
           style={{
             "display": "flex",
-            "justify-content": "space-between",
-            "border-bottom": "1px solid black"
+            "justifyContent": "space-between",
+            "borderBottom": "1px solid black"
           }}> {/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */}
           <div>{item.title}</div>
-          <div style={{ "min-width": "3em" }}>{item.percent}</div>
+          <div style={{ "minWidth": "3em" }}>{item.percent}</div>
         </div>
       )
     }
