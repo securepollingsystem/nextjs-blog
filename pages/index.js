@@ -15,7 +15,7 @@ export default function Home() {
     <br />
     <input value={searchstring} onChange={e => setSearchstring(e.target.value)}/>
     {
-      getSubset(searchstring).map((item) =>
+      getSubset(searchstring.toLowerCase()).map((item) =>
         <div
           onClick={() => onClickRow(item)}
           key={item.id} // react uses the key to keep track of DOM so must be unique

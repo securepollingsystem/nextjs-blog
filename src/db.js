@@ -1,3 +1,4 @@
+
 var stuff = [ // list of objects
 	{id: 1, title:"BART should be free for everyone", percent:43},
 	{id: 2, title:"Charles is pretty neat", percent:44},
@@ -30,4 +31,4 @@ export const getItem = (id) => stuff.find(s => s.id == id);
 
 export const getItems = () => stuff;
 
-export const getSubset = (subtext) => stuff.filter(({title}) => title.includes(subtext))
+export const getSubset = (subtext) => stuff.filter(({title}) => title.toLowerCase().includes(subtext))
