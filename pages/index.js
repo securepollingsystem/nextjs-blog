@@ -6,9 +6,13 @@ export default function Home() {
   const [searchstring, setSearchstring] = useState("");
   const router = useRouter();
 
-  const onClickRow = (item) => {
+//const onClickRow = (item) => {
+//  router.push(`confirm?id=${item.id}`);
+//};
+
+  const onClickRow = function(item) {
     router.push(`confirm?id=${item.id}`);
-  };
+  }
 
   return (<div>
     <h4>Secure Polling Demo</h4>
