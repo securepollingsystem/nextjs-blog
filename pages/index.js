@@ -1,6 +1,8 @@
 import { getItems, getSubset } from '../src/db';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import * as SPSClient from 'sps-client';
+console.log(SPSClient);
 
 export default function Home() {
   const [searchstring, setSearchstring] = useState("");
