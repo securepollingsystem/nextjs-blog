@@ -6,8 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "latest",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "next": "^13.4.19",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sps-client": "github:securepollingsystem/node-client"
   }
 }

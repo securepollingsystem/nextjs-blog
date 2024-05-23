@@ -11,13 +11,15 @@ export default () => {
 
   const onCancel = () => router.push('/');
 
+  const onConfirm = () => router.push(`?whatareyoudoing&id=${query.id}`);
+
   const { title } = getItem(query.id);
 
   return (
     <>
       <div>Do you want to add this statement to your screed?</div>
       <div>
-        <button>Confirm</button>
+        <button onClick={onConfirm}>Confirm</button>
         <button onClick={onCancel}>Cancel</button></div>
       <div>{title}</div>
     </>

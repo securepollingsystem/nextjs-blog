@@ -1,14 +1,16 @@
 import { getItems, getSubset } from '../src/db';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import * as SPSClient from 'sps-client';
+console.log(SPSClient);
 
 export default function Home() {
   const [searchstring, setSearchstring] = useState("");
   const router = useRouter();
 
-  const onClickRow = (item) => {
-    router.push(`confirm?id=${item.id}`);
-  };
+  const onClickRow = function(item) {    //const onClickRow = (item) => {
+    router.push(`confirm?id=${item.id}`);//  router.push(`confirm?id=${item.id}`);
+  }                                      //};
 
   return (<div>
     <h4>Secure Polling Demo</h4>
