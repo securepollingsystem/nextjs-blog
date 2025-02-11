@@ -1,8 +1,9 @@
 import { getItems, getSubset } from '../src/db';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import * as SPSClient from 'sps-client';
-console.log(SPSClient);
+// import * as SPSClient from 'sps-client';
+// TODO: sps-client needs eccrypto added to its package.json in order to work?
+// console.log(SPSClient);
 
 export default function Home() {
   const [searchstring, setSearchstring] = useState("");
