@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "next dev -p 8990",
+    "build": "next build -p 8990",
+    "start": "next start -p 8990"
   },
   "dependencies": {
     "next": "^13.4.19",
