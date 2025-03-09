@@ -13,12 +13,29 @@ export default function Home() {
     router.push(`confirm?id=${item.id}`);//  router.push(`confirm?id=${item.id}`);
   }                                      //};
 
-  return (<div>
+  var subset = getSubset(searchstring.toLowerCase());
+
+  // returning JSX
+  console.log(subset.length);
+  if (subset.length === 0) {
+    return (<div>
+    <h4>SECURE POLLING DEMO</h4>
+    <br />
+    <input value={searchstring} onChange={e => setSearchstring(e.target.value)}/>
+    <div onClick={() => onClickRow({title:"fdgh", id:"-1"})} key="id" // TODO: modify onClickRow to work with actual opinion rather than item ID
+      style={{
+            "display": "flex",
+            "justifyContent": "space-between",
+            "borderBottom": "1px solid red"
+          }}> click this to add {searchstring} to your screed</div>
+    </div>);
+  } else {
+    return (<div>
     <h4>Secure Polling Demo</h4>
     <br />
     <input value={searchstring} onChange={e => setSearchstring(e.target.value)}/>
     {
-      getSubset(searchstring.toLowerCase()).map((item) =>
+      subset.map((item) =>
         <div
           onClick={() => onClickRow(item)}
           key={item.id} // react uses the key to keep track of DOM so must be unique
@@ -34,4 +51,5 @@ export default function Home() {
     }
 
   </div>);
+  }
 }
