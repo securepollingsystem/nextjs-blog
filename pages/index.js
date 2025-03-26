@@ -1,4 +1,4 @@
-import { getItems, getSubset } from '../src/db';
+// import { getItems, getSubset } from '../src/db';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Head from 'next/head'; // this is needed to be able to add a css style to the <head> of the document, for :hover
@@ -7,20 +7,38 @@ import Head from 'next/head'; // this is needed to be able to add a css style to
 // TODO: sps-client needs eccrypto added to its package.json in order to work?
 // console.log(SPSClient);
 
+async function getSubset(searchText) {
+  const res = await fetch(`http://stemgrid.org:8993/opinions?subset=%worth%`).catch(e => {console.log(e)});
+
+  if (!res.ok) {
+    throw new Error(`Network response was not ok. Status: ${res.status}`);
+  }
+
+  //console.log('Response:', res);
+
+  const data = await res.json();
+
+  console.log('Parsed Data:', data);
+
+  return data;
+}
+
 export default function Home() {
   const [searchstring, setSearchstring] = useState(""); // returns the value and a function to update the value (initially "")
   const router = useRouter();
 
-  fetch('http://stemgrid.org:8993/opinions?subset=%worth%').then(response => response.json()).then(json => console.log(json)).catch(e => {console.log(e)});
+  // https://search.brave.com/search?q=in+nextjs+how+do+i+use+fetch+to+load+data+from+an+api&source=web&summary=1&conversation=c8010b75d138ab531b04c2
+  //fetch('http://stemgrid.org:8993/opinions?subset=%worth%').then(response => response.json()).then(jj => console.log(jj)).catch(e => {console.log(e)});
 
   const onClickRow = function(item) {    //const onClickRow = (item) => {
     router.push(`confirm?id=${item.id}`);//  router.push(`confirm?id=${item.id}`);
   }                                      //};
 
-  var subset = getSubset(searchstring.toLowerCase());
+  var subset = [getSubset(searchstring.toLowerCase())['value']] // turn an object into an array!??!
 
   // returning JSX
-  console.log(subset.length);
+  console.log('what is subset')
+  console.log(subset); // looks like json
   if (subset.length === 0) {
     return (<div>
       <Head>
@@ -57,8 +75,8 @@ export default function Home() {
             "justifyContent": "space-between",
             "borderBottom": "1px solid black"
           }}> {/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */}
-          <div>{item.title}</div>
-          <div style={{ "font-weight":"bold", "minWidth": "3em" }}>{item.percent}</div>
+          <div>{item.opinion}</div>
+          <div style={{ "font-weight":"bold", "minWidth": "3em" }}>{item.screed_count}</div>
         </div>
       )
     }
