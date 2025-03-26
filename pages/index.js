@@ -1,6 +1,6 @@
 // import { getItems, getSubset } from '../src/db';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head'; // this is needed to be able to add a css style to the <head> of the document, for :hover
 
 // import * as SPSClient from 'sps-client';
@@ -8,7 +8,7 @@ import Head from 'next/head'; // this is needed to be able to add a css style to
 // console.log(SPSClient);
 
 async function getSubset(searchText) {
-  const res = await fetch(`http://stemgrid.org:8993/opinions?subset=%worth%`).catch(e => {console.log(e)});
+  const res = await fetch(`http://stemgrid.org:8993/opinions?subset=%{searchText}%`).catch(e => {console.log(e)});
 
   if (!res.ok) {
     throw new Error(`Network response was not ok. Status: ${res.status}`);
@@ -25,6 +25,7 @@ async function getSubset(searchText) {
 
 export default function Home() {
   const [searchstring, setSearchstring] = useState(""); // returns the value and a function to update the value (initially "")
+  const [subset, setSubset] = useState([]);
   const router = useRouter();
 
   // https://search.brave.com/search?q=in+nextjs+how+do+i+use+fetch+to+load+data+from+an+api&source=web&summary=1&conversation=c8010b75d138ab531b04c2
@@ -34,7 +35,7 @@ export default function Home() {
     router.push(`confirm?id=${item.id}`);//  router.push(`confirm?id=${item.id}`);
   }                                      //};
 
-  var subset = getSubset(searchstring.toLowerCase())
+  useEffect(() => getSubset(searchstring.toLowerCase()).then(setSubset), []); // when you give it [], that is a hack to use `useEffect` to trigger something once and only once for a given page load
 
   // returning JSX
   console.log('what is subset', subset); // looks like json
