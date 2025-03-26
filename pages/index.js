@@ -24,7 +24,7 @@ export default function Home() {
   if (subset.length === 0) {
     return (<div>
       <Head>
-        <style>{` .hover-effect:hover { background-color: #00ff00; /* Background color on hover */ } `}</style>
+        <style>{` .hover-effect:hover { font-weight:bold; background-color: #00ff00; /* Background color on hover */ } `}</style>
       </Head>
     <h4>SECURE POLLING DEMO</h4>
     <br />
@@ -41,7 +41,7 @@ export default function Home() {
     return (
       <div>
       <Head>
-        <style>{` .hover-effect:hover { background-color: #00ff00; /* Background color on hover */ } `}</style>
+        <style>{` .hover-effect:hover { font-weight:bold; background-color: #00ff00; /* Background color on hover */ } `}</style>
       </Head>
     <h4>Secure Polling Demo</h4>
     <br />
