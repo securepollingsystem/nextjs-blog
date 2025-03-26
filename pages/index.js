@@ -28,7 +28,7 @@ export default function Home() {
     <br />
     <input value={searchstring} onChange={e => setSearchstring(e.target.value)}/>
     <div onClick={() => onClickRow({title:"fdgh", id:"-1"})} key="id" // TODO: modify onClickRow to work with actual opinion rather than item ID
-      class="hover-effect"
+      className="hover-effect"
       style={{
             "display": "flex",
             "justifyContent": "space-between",
@@ -49,14 +49,14 @@ export default function Home() {
         <div
           onClick={() => onClickRow(item)}
           key={item.id} // react uses the key to keep track of DOM so must be unique
-          class="hover-effect"
+          className="hover-effect"
           style={{
             "display": "flex", /* this is so that the percentage appears after the phrase, on the same line */
             "justifyContent": "space-between",
             "borderBottom": "1px solid black"
           }}> {/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */}
           <div>{item.title}</div>
-          <div style={{ "minWidth": "3em" }}>{item.percent}</div>
+          <div style={{ "font-weight":"bold", "minWidth": "3em" }}>{item.percent}</div>
         </div>
       )
     }
