@@ -34,11 +34,10 @@ export default function Home() {
     router.push(`confirm?id=${item.id}`);//  router.push(`confirm?id=${item.id}`);
   }                                      //};
 
-  var subset = [getSubset(searchstring.toLowerCase())['value']] // turn an object into an array!??!
+  var subset = getSubset(searchstring.toLowerCase())
 
   // returning JSX
-  console.log('what is subset')
-  console.log(subset); // looks like json
+  console.log('what is subset', subset); // looks like json
   if (subset.length === 0) {
     return (<div>
       <Head>
@@ -56,6 +55,7 @@ export default function Home() {
           }}> click this to add {searchstring} to your screed</div>
     </div>);
   } else {
+    console.log('subset is',subset);
     return (
       <div>
       <Head>
