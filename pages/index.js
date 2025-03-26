@@ -11,6 +11,8 @@ export default function Home() {
   const [searchstring, setSearchstring] = useState(""); // returns the value and a function to update the value (initially "")
   const router = useRouter();
 
+  fetch('http://stemgrid.org:8993/opinions?subset=%worth%').then(response => response.json()).then(json => console.log(json)).catch(e => {console.log(e)});
+
   const onClickRow = function(item) {    //const onClickRow = (item) => {
     router.push(`confirm?id=${item.id}`);//  router.push(`confirm?id=${item.id}`);
   }                                      //};
