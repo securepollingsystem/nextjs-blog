@@ -52,6 +52,7 @@ export default function Home() {
           class="hover-effect"
           style={{
             "display": "flex", /* this is so that the percentage appears after the phrase, on the same line */
+            "cursor":"pointer",
             "justifyContent": "space-between",
             "borderBottom": "1px solid black"
           }}> {/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */}

@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 8990",
-    "build": "next build -p 8990",
+    "build": "next build",
     "start": "next start -p 8990"
   },
   "dependencies": {
