@@ -16,7 +16,23 @@ export default function Home() {
     router.push(`confirm?id=${item.id}`);//  router.push(`confirm?id=${item.id}`);
   }                                      //};
 
-  useEffect(() => getSubset(searchstring.toLowerCase()).then(setSubset), []); // when you give it [], that is a hack to use `useEffect` to trigger something once and only once for a given page load
+  useEffect(() => {
+    async function getSubset(searchText) {
+      const res = await fetch(`http://stemgrid.org:8993/opinions?subset=%${searchText}%`).catch(e => {console.log(e)});
+      console.log('url:',`http://stemgrid.org:8993/opinions?subset=%${searchText}%`);
+
+      if (!res.ok) {
+        throw new Error(`Network response was not ok. Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      console.log('fetched opinions:', data.length);
+
+      return data;
+    }
+    getSubset(searchstring.toLowerCase()).then(setSubset)
+  }, [searchstring]); // searchstring is what it watches and reloads the fetch on changes!!!!!!!
 
   // returning JSX
   //console.log('what is subset', subset); // looks like json
