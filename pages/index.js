@@ -7,21 +7,6 @@ import Head from 'next/head'; // this is needed to be able to add a css style to
 // TODO: sps-client needs eccrypto added to its package.json in order to work?
 // console.log(SPSClient);
 
-async function getSubset(searchText) {
-  const res = await fetch(`http://stemgrid.org:8993/opinions?subset=%${searchText}%`).catch(e => {console.log(e)});
-  console.log('url:',`http://stemgrid.org:8993/opinions?subset=%${searchText}%`);
-
-  if (!res.ok) {
-    throw new Error(`Network response was not ok. Status: ${res.status}`);
-  }
-
-  const data = await res.json();
-
-  console.log('fetched opinions:', data.length);
-
-  return data;
-}
-
 export default function Home() {
   const [searchstring, setSearchstring] = useState(""); // returns the value and a function to update the value (initially "")
   const [subset, setSubset] = useState([]);
