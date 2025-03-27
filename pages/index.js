@@ -8,17 +8,16 @@ import Head from 'next/head'; // this is needed to be able to add a css style to
 // console.log(SPSClient);
 
 async function getSubset(searchText) {
-  const res = await fetch(`http://stemgrid.org:8993/opinions?subset=%{searchText}%`).catch(e => {console.log(e)});
+  const res = await fetch(`http://stemgrid.org:8993/opinions?subset=%${searchText}%`).catch(e => {console.log(e)});
+  console.log('url:',`http://stemgrid.org:8993/opinions?subset=%${searchText}%`);
 
   if (!res.ok) {
     throw new Error(`Network response was not ok. Status: ${res.status}`);
   }
 
-  //console.log('Response:', res);
-
   const data = await res.json();
 
-  console.log('Parsed Data:', data);
+  console.log('fetched opinions:', data.length);
 
   return data;
 }
@@ -28,9 +27,6 @@ export default function Home() {
   const [subset, setSubset] = useState([]);
   const router = useRouter();
 
-  // https://search.brave.com/search?q=in+nextjs+how+do+i+use+fetch+to+load+data+from+an+api&source=web&summary=1&conversation=c8010b75d138ab531b04c2
-  //fetch('http://stemgrid.org:8993/opinions?subset=%worth%').then(response => response.json()).then(jj => console.log(jj)).catch(e => {console.log(e)});
-
   const onClickRow = function(item) {    //const onClickRow = (item) => {
     router.push(`confirm?id=${item.id}`);//  router.push(`confirm?id=${item.id}`);
   }                                      //};
@@ -38,7 +34,7 @@ export default function Home() {
   useEffect(() => getSubset(searchstring.toLowerCase()).then(setSubset), []); // when you give it [], that is a hack to use `useEffect` to trigger something once and only once for a given page load
 
   // returning JSX
-  console.log('what is subset', subset); // looks like json
+  //console.log('what is subset', subset); // looks like json
   if (subset.length === 0) {
     return (<div>
       <Head>
@@ -56,7 +52,6 @@ export default function Home() {
           }}> click this to add {searchstring} to your screed</div>
     </div>);
   } else {
-    console.log('subset is',subset);
     return (
       <div>
       <Head>
@@ -77,7 +72,7 @@ export default function Home() {
             "borderBottom": "1px solid black"
           }}> {/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */}
           <div>{item.opinion}</div>
-          <div style={{ "font-weight":"bold", "minWidth": "3em" }}>{item.screed_count}</div>
+          <div style={{ "fontWeight":"bold", "minWidth": "3em" }}>{item.screed_count}</div>
         </div>
       )
     }
