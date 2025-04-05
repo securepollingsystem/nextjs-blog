@@ -64,6 +64,7 @@ const Home = () => {
       <br />
       {loadedScreed.map((item) => (
         <div
+          key={item.id} // react uses the key to keep track of DOM so must be unique
           className="hover-effect"
           style={{
             display:
@@ -87,7 +88,7 @@ const Home = () => {
       {subset.length === 0 ? (
         <div
           onClick={() => onClickRow({ title: "fdgh", id: "-1" })}
-          key="id" // TODO: modify onClickRow to work with actual opinion rather than item ID
+          key="compose"
           className="hover-effect"
           style={{
             display: "flex",
