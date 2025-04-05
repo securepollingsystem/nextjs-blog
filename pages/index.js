@@ -36,6 +36,19 @@ const Home = () => {
 
   const onClickRow = (item) => router.push(`confirm?id=${item.id}`);
 
+  if (typeof window !== 'undefined') {
+    const storedScreed = localStorage.getItem("myScreed");
+    if (storedScreed) {
+      var loadedScreed = JSON.parse(storedScreed);
+    } else {
+      console.log("storedScreed not found");
+      var loadedScreed = [{id: 4, opinion: 'client side rendered', screed_count: 45, updated_at: 1739428537840}];
+    }
+  } else {
+    var loadedScreed = [{id: 4, opinion: 'server side render', screed_count: 45, updated_at: 1739428537840}];
+  }
+  console.log(loadedScreed); // this shows up on the server console for the prerender
+
   useEffect(() => {
     getSubset(searchString.toLowerCase()).then(setSubset);
   }, [searchString]); // searchString is what it watches and reloads the fetch on changes!!!!!!!
@@ -49,6 +62,24 @@ const Home = () => {
       </Head>
       <h4>Secure Polling Demo</h4>
       <br />
+      {loadedScreed.map((item) => (
+        <div
+          className="hover-effect"
+          style={{
+            display:
+              "flex" /* this is so that the percentage appears after the phrase, on the same line */,
+            cursor: "pointer",
+            justifyContent: "space-between",
+            borderBottom: "1px solid black",
+          }}
+          >
+          {" "}
+          <div suppressHydrationWarning>{item.opinion}</div>
+          <div suppressHydrationWarning style={{ fontWeight: "bold", minWidth: "3em" }}>
+            {item.screed_count}
+          </div>
+        </div>
+      ))}
       <input
         value={searchString}
         onChange={(e) => setSearchString(e.target.value)}
