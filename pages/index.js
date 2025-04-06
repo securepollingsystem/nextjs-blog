@@ -64,7 +64,7 @@ const Home = () => {
       <br />
       {loadedScreed.map((item) => (
         <div
-          key={item.id} // react uses the key to keep track of DOM so must be unique
+          key={"myScreed"+item.id} // react uses the key to keep track of DOM so must be unique
           className="hover-effect"
           style={{
             display:
