@@ -2,6 +2,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Head from "next/head"; // this is needed to be able to add a css style to the <head> of the document, for :hover
+import Modal from "../components/Modal";
 
 // import * as SPSClient from 'sps-client';
 // TODO: sps-client needs eccrypto added to its package.json in order to work?
@@ -30,6 +31,7 @@ const getSubset = async (searchText) => {
 };
 
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
   const [searchString, setSearchString] = useState(""); // returns the value and a function to update the value (initially "")
   const [subset, setSubset] = useState([]);
   const router = useRouter();
@@ -81,6 +83,14 @@ const Home = () => {
           </div>
         </div>
       ))}
+      <div>
+        <button onClick={() => setShowModal(true)}>Open Modal</button>
+        {showModal &&
+            <Modal onClose={() => setShowModal(false)}>
+                Hello from the modal!
+            </Modal>
+        }
+      </div>
       <input
         value={searchString}
         onChange={(e) => setSearchString(e.target.value)}
