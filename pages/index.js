@@ -30,20 +30,18 @@ const getSubset = async (searchText) => {
   return data;
 };
 
-var modalTitle = "title"; // this is where we put the title of the modal
-var modalChildren = "slkdfjslkdfjsldkfj"; // this is where we put the content of the modal
-
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [searchString, setSearchString] = useState(""); // returns the value and a function to update the value (initially "")
   const [subset, setSubset] = useState([]);
+  const [modalData, setModalData] = useState({title : "title", children : "slkdfjslkdfjsldkfj"});
+
   const router = useRouter();
 
   const onClickRow = (item) => router.push(`confirm?id=${item.id}`);
 
   function bringUpAddThisModal(opinion) {
-    modalTitle = "Do you want to add this opinion to your screed?"
-    modalChildren = opinion;
+    setModalData({title : "Do you want to add this opinion to your screed?", children : opinion});
     // TODO: see if we already have it and behave accordingly
     // TODO: add a button to do what you're being asked to do
     // TODO: hook escape key to close modal
@@ -98,8 +96,8 @@ const Home = () => {
       <div>
         <button onClick={() => setShowModal(true)}>Open Modal</button>
         {showModal &&
-            <Modal onClose={() => setShowModal(false)} title={modalTitle}>
-                {modalChildren}
+            <Modal onClose={() => setShowModal(false)} title={modalData.title}>
+                {modalData.children}
             </Modal>
         }
       </div>
