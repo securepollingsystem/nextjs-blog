@@ -42,8 +42,8 @@ const Home = () => {
 
   function bringUpAddThisModal(opinion) {
     var Buttons = () => (<div>
-      <button onClick={setShowModal(false)}>Confirm</button>
-      <button onClick={setShowModal(false)}>Cancel</button></div>);
+      <button onClick={() => setShowModal(false)}>Confirm</button>
+      <button onClick={() => setShowModal(false)}>Cancel</button></div>);
 
     setModalData({title : "Do you want to add this opinion to your screed?",
       children : <div><div>{opinion}</div><Buttons /></div>});
