@@ -30,13 +30,23 @@ const getSubset = async (searchText) => {
   return data;
 };
 
+var addThisModalOpinion = "slkdfjslkdfjsldkfj"; // this is where we put the opinion you want to add
+
 const Home = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAddThisModal, setShowAddThisModal] = useState(false);
   const [searchString, setSearchString] = useState(""); // returns the value and a function to update the value (initially "")
   const [subset, setSubset] = useState([]);
   const router = useRouter();
 
   const onClickRow = (item) => router.push(`confirm?id=${item.id}`);
+
+  function bringUpAddThisModal(opinion) {
+    addThisModalOpinion = opinion;
+    // TODO: see if we already have it and behave accordingly
+    // TODO: add a button to do what you're being asked to do
+    // TODO: hook escape key to close modal
+    setShowAddThisModal(true);
+  }
 
   if (typeof window !== 'undefined') {
     const storedScreed = localStorage.getItem("myScreed");
@@ -84,10 +94,10 @@ const Home = () => {
         </div>
       ))}
       <div>
-        <button onClick={() => setShowModal(true)}>Open Modal</button>
-        {showModal &&
-            <Modal onClose={() => setShowModal(false)}>
-                Hello from the modal!
+        <button onClick={() => setShowAddThisModal(true)}>Open Modal</button>
+        {showAddThisModal &&
+            <Modal onClose={() => setShowAddThisModal(false)} title="title">
+                Do you want to add this opinion to your screed? {addThisModalOpinion}
             </Modal>
         }
       </div>
@@ -111,7 +121,7 @@ const Home = () => {
       ) : (
         subset.map((item) => (
           <div
-            onClick={() => onClickRow(item)}
+            onClick={() => bringUpAddThisModal(item.opinion)}
             key={item.id} // react uses the key to keep track of DOM so must be unique
             className="hover-effect"
             style={{

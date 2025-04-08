@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const Modal = ({ onClose, children, title }) => {
+const Modal = ({ onClose, children, title }) => { // children is a special property and represents what's passed inside the <Modal>
     const handleCloseClick = (e) => {
         e.preventDefault();
         onClose();
