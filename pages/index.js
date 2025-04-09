@@ -40,9 +40,15 @@ const Home = () => {
 
   const onClickRow = (item) => router.push(`confirm?id=${item.id}`);
 
+  function addThisOpinion(opinion) {
+    loadedScreed.push(opinion);
+    setShowModal(false);
+    console.log(loadedScreed); // this works but loadedScreed goes back to its original definition from line 69
+  }
+
   function bringUpAddThisModal(opinion) {
     var Buttons = () => (<div>
-      <button onClick={() => setShowModal(false)}>Confirm</button>
+      <button onClick={() => addThisOpinion(opinion)}>Confirm</button>
       <button onClick={() => setShowModal(false)}>Cancel</button></div>);
 
     setModalData({title : "Do you want to add this opinion to your screed?",
@@ -60,10 +66,10 @@ const Home = () => {
       var loadedScreed = JSON.parse(storedScreed);
     } else {
       console.log("storedScreed not found");
-      var loadedScreed = [{id: 4, opinion: 'client side rendered', screed_count: 45, updated_at: 1739428537840}];
+      var loadedScreed = ['client side rendered'];
     }
   } else {
-    var loadedScreed = [{id: 4, opinion: 'server side render', screed_count: 45, updated_at: 1739428537840}];
+    var loadedScreed = ['server side render'];
   }
   console.log(loadedScreed); // this shows up on the server console for the prerender
 
@@ -93,7 +99,7 @@ const Home = () => {
           }}
           >
           {" "}
-          <div suppressHydrationWarning>{item.opinion}</div>
+          <div suppressHydrationWarning>{item}</div>
           <div suppressHydrationWarning style={{ fontWeight: "bold", minWidth: "3em" }}>
             {item.screed_count}
           </div>
