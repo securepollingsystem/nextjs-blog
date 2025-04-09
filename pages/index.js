@@ -42,6 +42,7 @@ const Home = () => {
 
   function addThisOpinion(opinion) {
     loadedScreed.push(opinion);
+    localStorage.setItem("myScreed",JSON.stringify(loadedScreed));
     setShowModal(false);
     console.log(loadedScreed); // this works but loadedScreed goes back to its original definition from line 69
   }
@@ -63,7 +64,12 @@ const Home = () => {
   if (typeof window !== 'undefined') {
     const storedScreed = localStorage.getItem("myScreed");
     if (storedScreed) {
-      var loadedScreed = JSON.parse(storedScreed);
+      try {
+        var loadedScreed = JSON.parse(storedScreed);
+      } catch(error) {
+        console.log(error);
+        var loadedScreed = ['json parse error'];
+      }
     } else {
       console.log("storedScreed not found");
       var loadedScreed = ['client side rendered'];
