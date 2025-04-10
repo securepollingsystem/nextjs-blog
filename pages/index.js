@@ -48,12 +48,18 @@ const Home = () => {
   }
 
   function bringUpAddThisModal(opinion) {
-    var Buttons = () => (<div>
-      <button onClick={() => addThisOpinion(opinion)}>Confirm</button>
-      <button onClick={() => setShowModal(false)}>Cancel</button></div>);
-
-    setModalData({title : "Do you want to add this opinion to your screed?",
+    if (loadedScreed.indexOf(opinion) >= 0) {
+      var Buttons = () => (<div>
+        <button onClick={() => setShowModal(false)}>Oops sorry</button></div>);
+      setModalData({title : "You already have this opinion in your screed!",
       children : <div><div>{opinion}</div><Buttons /></div>});
+    } else {
+      var Buttons = () => (<div>
+        <button onClick={() => addThisOpinion(opinion)}>Confirm</button>
+        <button onClick={() => setShowModal(false)}>Cancel</button></div>);
+      setModalData({title : "Do you want to add this opinion to your screed?",
+      children : <div><div>{opinion}</div><Buttons /></div>});
+    }
 
     // TODO: see if we already have it and behave accordingly
     // TODO: add a button to do what you're being asked to do
