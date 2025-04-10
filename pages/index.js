@@ -112,6 +112,12 @@ const Home = () => {
       </Head>
       <h4>Secure Polling Demo</h4>
       <br />
+      <div style={{
+        display: "flex"
+          }}>
+        <h1>Your Screed:</h1>
+        <button onClick={() => clearMyScreedModal()}>Clear my screed!</button>
+      </div>
       {loadedScreed.map((item) => (
         <div
           key={item} // react uses the key to keep track of DOM so must be unique
@@ -132,17 +138,21 @@ const Home = () => {
         </div>
       ))}
       <div>
-        <button onClick={() => clearMyScreedModal()}>Clear my screed!</button>
         {showModal &&
             <Modal onClose={() => setShowModal(false)} title={modalData.title}>
                 {modalData.children}
             </Modal>
         }
       </div>
+    <div style={{
+        display: "flex"
+          }}>
+    <h1>Search text:</h1>
       <input
         value={searchString}
         onChange={(e) => setSearchString(e.target.value)}
       />
+    </div>
       {subset.length === 0 ? (
         <div
           onClick={() => onClickRow({ title: "fdgh", id: "-1" })}
