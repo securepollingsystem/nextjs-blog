@@ -47,6 +47,20 @@ const Home = () => {
     console.log(loadedScreed); // this works but loadedScreed goes back to its original definition from line 69
   }
 
+  function clearMyScreedModal() {
+    var Buttons = () => (<div>
+      <button onClick={() => {
+        loadedScreed = [''];
+        localStorage.setItem("myScreed",JSON.stringify(loadedScreed));
+        setShowModal(false);
+      } }>yes Clear My Screed</button>
+      <button onClick={() => setShowModal(false)}>Cancel</button></div>);
+
+    setModalData({title : "You are about to clear out your whole screed!",
+    children : <div><Buttons /></div>});
+    setShowModal(true);
+  }
+
   function bringUpAddThisModal(opinion) {
     if (loadedScreed.indexOf(opinion) >= 0) {
       var Buttons = () => (<div>
@@ -118,7 +132,7 @@ const Home = () => {
         </div>
       ))}
       <div>
-        <button onClick={() => setShowModal(true)}>Open Modal</button>
+        <button onClick={() => clearMyScreedModal()}>Clear my screed!</button>
         {showModal &&
             <Modal onClose={() => setShowModal(false)} title={modalData.title}>
                 {modalData.children}
