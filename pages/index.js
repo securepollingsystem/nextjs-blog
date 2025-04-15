@@ -61,6 +61,20 @@ const Home = () => {
     setShowModal(true);
   }
 
+  function deleteThisOpinionModal(opinion) {
+    var Buttons = () => (<div>
+      <button onClick={() => {
+        loadedScreed = loadedScreed.filter(item => item !== opinion); // remove this opinion
+        localStorage.setItem("myScreed",JSON.stringify(loadedScreed));
+        setShowModal(false);
+      } }>remove from my screed</button>
+      <button onClick={() => setShowModal(false)}>Cancel</button></div>);
+
+    setModalData({title : "Do you want to REMOVE this opinion from your screed?",
+    children : <div><div>{opinion}</div><Buttons /></div>});
+    setShowModal(true);
+  }
+
   function bringUpAddThisModal(opinion) {
     if (loadedScreed.indexOf(opinion) >= 0) {
       var Buttons = () => (<div>
@@ -120,6 +134,7 @@ const Home = () => {
       </div>
       {loadedScreed.map((item) => (
         <div
+          onClick={() => deleteThisOpinionModal(item)}
           key={item} // react uses the key to keep track of DOM so must be unique
           className="hover-effect"
           style={{
