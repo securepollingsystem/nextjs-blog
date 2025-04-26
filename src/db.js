@@ -31,4 +31,11 @@ export const getItem = (id) => stuff.find(s => s.id == id);
 
 export const getItems = () => stuff;
 
-export const getSubset = (subtext) => stuff.filter(({title}) => title.toLowerCase().includes(subtext))
+//export const getSubset = (subtext) => stuff.filter(({title}) => title.toLowerCase().includes(subtext))
+
+export const getSubset = function(subtext) {
+  return stuff.filter(function(item) { // filter returns an array of the elements that returned True
+    let title = item.title;
+    return title.toLowerCase().includes(subtext)
+  })
+}
