@@ -19,11 +19,19 @@ const getSubset = async (searchText) => {
     `http://stemgrid.org:8993/opinions?subset=%${searchText}%`
   );
 
-  if (!res.ok) {
-    throw new Error(`Network response was not ok. Status: ${res.status}`);
-  }
+  var data = []
 
-  const data = await res.json();
+  try {
+    if (!res.ok) {
+      throw new Error(`Network response was not ok. Status: ${res.status}`);
+    }
+    data = await res.json();
+  } catch(error) {
+    console.log('could not try if !res.ok', error);
+    if (searchText == '') {
+      data = [ {id:0,opinion:'no data was returned from the server',screed_count:53} ];
+    }
+  }
 
   console.log("fetched opinions:", data.length);
 
