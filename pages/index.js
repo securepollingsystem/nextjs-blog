@@ -178,7 +178,7 @@ const Home = () => {
     </div>
       {subset.length === 0 ? (
         <div
-          onClick={() => onClickRow({ title: "fdgh", id: "-1" })}
+          onClick={() => bringUpAddThisModal(searchString)}
           key="compose"
           className="hover-effect"
           style={{
