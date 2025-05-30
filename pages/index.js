@@ -151,7 +151,7 @@ const Home = () => { // react components Must Be Named With A Capital Letter
         >
           {" "}
           <div>{item}</div>
-          <div style={{ fontWeight: "bold", minWidth: "3em" }}> {1} </div>
+          <div style={{ fontWeight: "bold", minWidth: "3em" }}> {item.screed_count} </div>
         </div>
       ))}
       <div>
