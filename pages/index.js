@@ -38,19 +38,20 @@ const getSubset = async (searchText) => {
   return data;
 };
 
-const Home = () => {
+const Home = () => { // react components Must Be Named With A Capital Letter
   const [showModal, setShowModal] = useState(false);
   const [searchString, setSearchString] = useState(""); // returns the value and a function to update the value (initially "")
   const [subset, setSubset] = useState([]);
   const [modalData, setModalData] = useState({title : "title", children : "slkdfjslkdfjsldkfj"});
+  const [loadedScreed, setLoadedScreed] = useState(['default val']);
 
   const router = useRouter();
 
   const onClickRow = (item) => router.push(`confirm?id=${item.id}`);
 
   function addThisOpinion(opinion) {
-    loadedScreed.push(opinion);
-    localStorage.setItem("myScreed",JSON.stringify(loadedScreed));
+    setLoadedScreed([...loadedScreed, opinion]);
+    localStorage.setItem("myScreed", JSON.stringify(loadedScreed));
     setShowModal(false);
     console.log(loadedScreed); // this works but loadedScreed goes back to its original definition from line 69
   }
@@ -58,8 +59,8 @@ const Home = () => {
   function clearMyScreedModal() {
     var Buttons = () => (<div>
       <button onClick={() => {
-        loadedScreed = [''];
-        localStorage.setItem("myScreed",JSON.stringify(loadedScreed));
+        setLoadedScreed([]);
+        localStorage.setItem("myScreed", JSON.stringify(loadedScreed));
         setShowModal(false);
       } }>yes Clear My Screed</button>
       <button onClick={() => setShowModal(false)}>Cancel</button></div>);
@@ -72,8 +73,8 @@ const Home = () => {
   function deleteThisOpinionModal(opinion) {
     var Buttons = () => (<div>
       <button onClick={() => {
-        loadedScreed = loadedScreed.filter(item => item !== opinion); // remove this opinion
-        localStorage.setItem("myScreed",JSON.stringify(loadedScreed));
+        setLoadedScreed(loadedScreed.filter(item => item !== opinion)); // remove this opinion
+        localStorage.setItem("myScreed", JSON.stringify(loadedScreed));
         setShowModal(false);
       } }>remove from my screed</button>
       <button onClick={() => setShowModal(false)}>Cancel</button></div>);
@@ -87,13 +88,18 @@ const Home = () => {
     if (loadedScreed.indexOf(opinion) >= 0) {
       var Buttons = () => (<div>
         <button onClick={() => setShowModal(false)}>Oops sorry</button></div>);
-      setModalData({title : "You already have this opinion in your screed!",
-      children : <div><div>{opinion}</div><Buttons /></div>});
+
+      setModalData({
+        title : "You already have this opinion in your screed!",
+        children : <div><div>{opinion}</div><Buttons /></div>
+      });
     } else {
       var Buttons = () => (<div>
         <button onClick={() => addThisOpinion(opinion)}>Confirm</button>
         <button onClick={() => setShowModal(false)}>Cancel</button></div>);
+
       setModalData({title : "Do you want to add this opinion to your screed?",
+
       children : <div><div>{opinion}</div><Buttons /></div>});
     }
 
@@ -103,23 +109,14 @@ const Home = () => {
     setShowModal(true);
   }
 
-  if (typeof window !== 'undefined') {
-    const storedScreed = localStorage.getItem("myScreed");
-    if (storedScreed) {
-      try {
-        var loadedScreed = JSON.parse(storedScreed);
-      } catch(error) {
-        console.log(error);
-        var loadedScreed = ['json parse error'];
-      }
-    } else {
-      console.log("storedScreed not found");
-      var loadedScreed = ['client side rendered'];
-    }
-  } else {
-    var loadedScreed = ['server side render'];
-  }
-  console.log(loadedScreed); // this shows up on the server console for the prerender
+  useEffect(() =>
+    setLoadedScreed(
+      JSON.parse(
+        localStorage.getItem("myScreed")
+      ) || ["nothing found in local storage"]
+    ),
+    []
+  );
 
   useEffect(() => {
     getSubset(searchString.toLowerCase()).then(setSubset);
@@ -143,21 +140,18 @@ const Home = () => {
       {loadedScreed.map((item) => (
         <div
           onClick={() => deleteThisOpinionModal(item)}
-          key={item} // react uses the key to keep track of DOM so must be unique
+          key={JSON.stringify(item)}
           className="hover-effect"
           style={{
-            display:
-              "flex" /* this is so that the percentage appears after the phrase, on the same line */,
+            display: "flex",
             cursor: "pointer",
             justifyContent: "space-between",
             borderBottom: "1px solid black",
           }}
-          >
+        >
           {" "}
-          <div suppressHydrationWarning>{item}</div>
-          <div suppressHydrationWarning style={{ fontWeight: "bold", minWidth: "3em" }}>
-            {item.screed_count}
-          </div>
+          <div>{item}</div>
+          <div style={{ fontWeight: "bold", minWidth: "3em" }}> {1} </div>
         </div>
       ))}
       <div>
