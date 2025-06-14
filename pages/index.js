@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Head from "next/head"; // this is needed to be able to add a css style to the <head> of the document, for :hover
 import Modal from "../components/Modal";
+import * as sodium from 'libsodium-wrappers';
 
 // import * as SPSClient from 'sps-client';
 // TODO: sps-client needs eccrypto added to its package.json in order to work?
@@ -38,6 +39,10 @@ const getSubset = async (searchText) => {
   return data;
 };
 
+async function initSodium() {
+  await sodium.ready; // Now you can use sodium functions
+}
+
 const Home = () => { // react components Must Be Named With A Capital Letter
   const [showModal, setShowModal] = useState(false);
   const [searchString, setSearchString] = useState(""); // returns the value and a function to update the value (initially "")
@@ -71,6 +76,10 @@ const Home = () => { // react components Must Be Named With A Capital Letter
   }
 
   function deleteThisOpinionModal(opinion) {
+    initSodium(); // libsodium
+    const key = sodium.randombytes_buf(sodium.crypto_secretbox_KEYBYTES);
+    console.log('Generated key:', sodium.to_hex(key));
+
     var Buttons = () => (<div>
       <button onClick={() => {
         setLoadedScreed(loadedScreed.filter(item => item !== opinion)); // remove this opinion

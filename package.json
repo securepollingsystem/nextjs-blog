@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "libsodium": "^0.7.15",
+    "libsodium-wrappers": "^0.7.15",
     "next": "^13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
